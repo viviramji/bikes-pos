@@ -1,5 +1,8 @@
 package com.globomatics.bike.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,6 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Bike {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,7 +22,8 @@ public class Bike {
     private String model;
     private String serialNumber;
     private BigDecimal purchasePrice;
-    private Date purchaceDate;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy")
+    private Date purchaseDate;
     private Boolean contact;
 
     public Long getId() {
@@ -77,12 +82,12 @@ public class Bike {
         this.purchasePrice = purchasePrice;
     }
 
-    public Date getPurchaceDate() {
-        return purchaceDate;
+    public Date getPurchaseDate() {
+        return purchaseDate;
     }
 
-    public void setPurchaceDate(Date purchaceDate) {
-        this.purchaceDate = purchaceDate;
+    public void setPurchaseDate(Date purchaceDate) {
+        this.purchaseDate = purchaceDate;
     }
 
     public Boolean getContact() {
